@@ -16,4 +16,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y nymea nymea-plugins nymea-cli
 
+# Fix missing shared library error
+RUN strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
+
 CMD ["/usr/bin/nymead", "-n"]
